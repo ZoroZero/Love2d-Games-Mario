@@ -10,6 +10,7 @@ require 'src/StateMachine'
 
 require 'src/Ultil'
 
+require 'src/Animation'
 -- Game component
 
 

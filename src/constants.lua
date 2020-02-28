@@ -5,8 +5,32 @@ WINDOW_WIDTH = 1280;
 WINDOW_HEIGHT = 720;
 
 -- VIRTUAL DIMENSIONS
-VIRTUAL_WIDTH = 512;
-VIRTUAL_HEIGHT = 288;
+VIRTUAL_WIDTH = 256;
+VIRTUAL_HEIGHT = 144;
+
+
+-- CHARACTER DIMENSIONS
+CHARACTER_WIDTH = 16;
+CHARACTER_HEIGHT = 20;
+
+-- TILE DIMENSIONS
+TILE_SIZE = 16;
+
+-- TILE SET DIMENSIONS
+NUM_TILE_SETS_PER_ROW = 6;
+NUM_TILE_SETS_PER_COL = 10;
+
+-- NUM OF TILES IN A SET
+NUM_TILES_PER_ROW  = 5;
+NUM_TILES_PER_COL = 4;
+
+-- GRAVITY CONSTANT
+GRAVITY = 10;
+JUMP_ACELERATION = -5;
+
+-- BACK GROUND DIMENSIONS
+BACKGROUND_WIDTH = 256;
+BACKGROUND_HEIGHT = 128;
 
 -- SOUND
 game_Sounds = {
@@ -33,10 +57,18 @@ game_Fonts = {
 game_Textures = {
     -- ['background'] = love.graphics.newImage('assets/graphics/background.png'),
     -- ['main'] = love.graphics.newImage('assets/graphics/match3.png')
+    ['tile'] = love.graphics.newImage('assets/graphics/tiles.png'),
+    ['backgrounds'] = love.graphics.newImage('assets/graphics/backgrounds.png'),
+    ['green_alien'] = love.graphics.newImage('assets/graphics/green_alien.png')
 }
 
 
 -- GAME FRAMES
 game_Frames = {
-    -- ['tiles'] = generateTiles(game_Textures['main'])
+    ['tiles'] = generateQuad(game_Textures['tile'], TILE_SIZE, TILE_SIZE),
+    ['backgrounds'] = generateQuad(game_Textures['backgrounds'], BACKGROUND_WIDTH, BACKGROUND_HEIGHT),
+    ['character'] = generateQuad(game_Textures['green_alien'], CHARACTER_WIDTH, CHARACTER_HEIGHT)
 }
+
+game_Frames['tile_sets'] = generateTileSets(game_Frames['tiles'], NUM_TILE_SETS_PER_ROW, NUM_TILE_SETS_PER_COL,
+                                            NUM_TILES_PER_ROW, NUM_TILES_PER_COL);

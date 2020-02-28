@@ -31,29 +31,29 @@ function table.slice(tbl, start, stop, step)
 end
 
 
--- GENERATE TILE TABLE
-function generateTiles(atlas)
-    local tiles = {}
-    local sheet_width = 6;
-    local sheet_height = 9;
-    
-    local color_counter = 1;
-    
-    for y = 1, sheet_height do
-        local sprite_x = 0;
-        for i = 1, 2 do 
-            tiles[color_counter] = {}
-            
-            for x = 1, sheet_width do
-                table.insert( tiles[color_counter], love.graphics.newQuad(sprite_x , (y - 1)* TILE_HEIGHT, 
-                                                    TILE_WIDTH, TILE_HEIGHT, 
-                                                    atlas:getDimensions()) );
-                sprite_x = sprite_x + 32;
+-- GENERATE TILES TABLE FOR EACH SET OF TILES 
+-- setX: number of set in each row in sprite sheet
+-- setY: number of set per col in sprite sheet
+-- sizeX: number of tiles per row in a set
+-- sizeY: number of tiles per col in a set
+function generateTileSets(quad, setX, setY, sizeX, sizeY)
+    local tile_Sets = {};
+    local set_Counter = 1;
+    local sheet_width = setX * sizeX;
+
+    for set_Y = 1, setY do
+        for set_X = 1, setX do 
+            table.insert( tile_Sets, {} );
+
+            for y = (set_Y - 1) * sizeY + 1, (set_Y - 1) * sizeY + sizeY do
+                for x = (set_X - 1) * sizeX + 1, (set_X - 1) * sizeX + sizeX do
+                    table.insert(tile_Sets[set_Counter], quad[x + (y - 1)*sheet_width]);
+                end
             end
 
-            color_counter = color_counter + 1;
+            set_Counter = set_Counter + 1;
         end
     end
 
-    return tiles;
+    return tile_Sets;
 end
