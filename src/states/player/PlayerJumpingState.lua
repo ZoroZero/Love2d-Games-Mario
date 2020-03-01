@@ -31,11 +31,22 @@ function PlayerJumpingState:update(dt)
     if love.keyboard.isDown('left') then
         self.player.direction = 'left';
         self.player.x = self.player.x - PLAYER_WALK_SPEED * dt;
-        self.player:checkLeftCollision();
+        self.player:checkLeftCollision(dt);
     elseif love.keyboard.isDown('right') then
         self.player.direction = 'right';
         self.player.x = self.player.x + PLAYER_WALK_SPEED * dt;
-        self.player:checkRightCollision();
+        self.player:checkRightCollision(dt);
+    end
+
+    -- CHECK FOR OBJECT COLLISION
+    for k, object in pairs(self.player.level.objects) do 
+        if object:collides(self.player) then 
+            if object.solid then 
+                self.player.y = object.y + object.height;
+                self.player.dy = 0;
+                self.player:changeState('fall');
+            end
+        end
     end
 end
 

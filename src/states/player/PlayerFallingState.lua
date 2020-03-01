@@ -23,17 +23,37 @@ function PlayerFallingState:update(dt)
 
     if (bottom_Left_Tile and bottom_Right_Tile) and (bottom_Left_Tile:collidable() or bottom_Right_Tile:collidable()) then 
         self.player.dy = 0;
-        self.player:changeState('idle');
+        if love.keyboard.isDown('left') or love.keyboard.isDown('right') then 
+            self.player:changeState('walk');
+        else
+            self.player:changeState('idle');
+        end
         self.player.y = (bottom_Left_Tile.y - 1) * TILE_SIZE - self.player.height;
     end
 
+    -- Change direction mid air
     if love.keyboard.isDown('left') then
         self.player.direction = 'left';
         self.player.x = self.player.x - PLAYER_WALK_SPEED * dt;
-        self.player:checkLeftCollision();
+        self.player:checkLeftCollision(dt);
     elseif love.keyboard.isDown('right') then
         self.player.direction = 'right'
         self.player.x = self.player.x + PLAYER_WALK_SPEED * dt;
-        self.player:checkRightCollision();
+        self.player:checkRightCollision(dt);
+    end
+
+    -- check object collisions
+    for k, object in pairs(self.player.level.objects) do 
+        if object:collides(self.player) then 
+            if object.solid then
+                self.player.dy = 0; 
+                self.player.y = object.y - self.player.height;
+                if love.keyboard.isDown('left') or love.keyboard.isDown('right') then
+                    self.player:changeState('walk');
+                else
+                    self.player:changeState('idle');
+                end
+            end
+        end
     end
 end

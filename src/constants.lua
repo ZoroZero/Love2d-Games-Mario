@@ -48,6 +48,12 @@ COLLIDABLE_TILES = {
     GROUND_TILE
 }
 
+-- NUMBER OF BLOCK
+NUM_BLOCKS = 30;
+
+-- BUSH ID
+BUSH_IDS = {1, 2, 5, 6, 7}
+
 -- SOUND
 game_Sounds = {
     -- ['confirm'] = love.audio.newSource('assets/sounds/confirm.wav', 'static'),
@@ -77,7 +83,8 @@ game_Textures = {
     ['topper'] = love.graphics.newImage('assets/graphics/tile_tops.png'),
     ['backgrounds'] = love.graphics.newImage('assets/graphics/backgrounds.png'),
     ['green_alien'] = love.graphics.newImage('assets/graphics/green_alien.png'),
-    ['jump_blocks'] = love.graphics.newImage('assets/graphics/jump_blocks.png')
+    ['jump_blocks'] = love.graphics.newImage('assets/graphics/jump_blocks.png'),
+    ['bushes'] = love.graphics.newImage('assets/graphics/bushes_and_cacti.png')
 }
 
 
@@ -87,7 +94,8 @@ game_Frames = {
     ['toppers'] = generateQuad(game_Textures['topper'], TILE_SIZE, TILE_SIZE),
     ['backgrounds'] = generateQuad(game_Textures['backgrounds'], BACKGROUND_WIDTH, BACKGROUND_HEIGHT),
     ['green_alien'] = generateQuad(game_Textures['green_alien'], CHARACTER_WIDTH, CHARACTER_HEIGHT),
-    ['jump_blocks'] = generateQuad(game_Textures['jump_blocks'], TILE_SIZE, TILE_SIZE)
+    ['jump_blocks'] = generateQuad(game_Textures['jump_blocks'], TILE_SIZE, TILE_SIZE),
+    ['bushes'] = generateQuad(game_Textures['bushes'], TILE_SIZE, TILE_SIZE)
 }
 
 -- TABLE OF TILE SET
