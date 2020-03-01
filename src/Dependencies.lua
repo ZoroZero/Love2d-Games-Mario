@@ -27,6 +27,7 @@ require 'src/GameObject'
 -- Game states
 require 'src/states/BaseState'
 require 'src/states/game/PlayState'
+require 'src/states/game/StartState'
 
 require 'src/states/player/PlayerIdleState'
 require 'src/states/player/PlayerFallingState'

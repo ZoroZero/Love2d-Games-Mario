@@ -24,9 +24,10 @@ function love.load()
 
     -- SET UP STATE MACHINE
     game_State_Machine = StateMachine {
-        ['play'] = function () return PlayState() end
+        ['play'] = function () return PlayState() end,
+        ['start'] = function () return StartState() end
     }
-    game_State_Machine:change('play');
+    game_State_Machine:change('start');
     
     -- SET UP KEY CHECK
     love.keyboard.keysPressed = {};
@@ -51,6 +52,7 @@ function love.draw()
     game_State_Machine:render();
 
     displayFPS();
+    
     push:finish()
 end
 

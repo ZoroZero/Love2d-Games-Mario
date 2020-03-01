@@ -46,6 +46,19 @@ end
 function PlayState:render()
 
     -- render back ground
+    love.graphics.push();
+
+    -- first 256 pixel
+    love.graphics.draw(game_Textures['backgrounds'], game_Frames['backgrounds'][self.background_image], -math.floor(self.background_X), 0);
+    love.graphics.draw(game_Textures['backgrounds'], game_Frames['backgrounds'][self.background_image], -math.floor(self.background_X),
+        game_Textures['backgrounds']:getHeight() / 3 * 2, 0, 1, -1)
+
+    -- 256 pixels after that for looping
+    love.graphics.draw(game_Textures['backgrounds'], game_Frames['backgrounds'][self.background_image], 
+    -math.floor(self.background_X) + 256, 0);
+    love.graphics.draw(game_Textures['backgrounds'], game_Frames['backgrounds'][self.background_image], 
+    -math.floor(self.background_X) + 256, game_Textures['backgrounds']:getHeight() / 3 * 2, 0, 1, -1)
+
 
     love.graphics.translate(-math.floor(self.cam_X), 0)
     -- render stage
@@ -53,10 +66,17 @@ function PlayState:render()
 
     -- render player
     self.player:render()
+    love.graphics.pop();
 end
 
 
 -- UPDATE CAMERA FUNCTION
 function PlayState:updateCamera()
-    self.cam_X = self.player.x - (VIRTUAL_WIDTH / 2 - CHARACTER_WIDTH/2);
+    if self.player.x < VIRTUAL_WIDTH / 2 - CHARACTER_WIDTH/2 then 
+        self.cam_X = 0;
+    else
+        self.cam_X = self.player.x - (VIRTUAL_WIDTH / 2 - CHARACTER_WIDTH/2);
+    end
+
+    self.background_X = (self.cam_X / 3 )%256;
 end

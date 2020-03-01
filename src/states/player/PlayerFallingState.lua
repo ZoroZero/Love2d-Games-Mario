@@ -45,7 +45,8 @@ function PlayerFallingState:update(dt)
     -- check object collisions
     for k, object in pairs(self.player.level.objects) do 
         if object:collides(self.player) then 
-            if object.solid then
+            if object.solid 
+            and not (self.player.x < object.x - self.player.width or self.player.x > object.x + object.width) and self.player.y - object.y <= TILE_SIZE/2 then
                 self.player.dy = 0; 
                 self.player.y = object.y - self.player.height;
                 if love.keyboard.isDown('left') or love.keyboard.isDown('right') then

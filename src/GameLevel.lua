@@ -20,7 +20,10 @@ end
 function GameLevel:render(camera_Scroll_X)
 
     self.tile_Map:render(camera_Scroll_X)
+
     for k, object in pairs(self.objects) do
-        object:render();
+        if object.x >= camera_Scroll_X - 20 and object.x - camera_Scroll_X <= VIRTUAL_WIDTH + 20 then
+            object:render();
+        end
     end
 end
