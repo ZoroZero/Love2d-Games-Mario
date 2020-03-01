@@ -23,6 +23,7 @@ require 'src/TileMap'
 require 'src/Entity'
 require 'src/Player'
 require 'src/GameObject'
+require 'src/Snail'
 
 -- Game states
 require 'src/states/BaseState'
@@ -33,3 +34,8 @@ require 'src/states/player/PlayerIdleState'
 require 'src/states/player/PlayerFallingState'
 require 'src/states/player/PlayerWalkingState'
 require 'src/states/player/PlayerJumpingState'
+
+require 'src/states/snail/SnailIdleState'
+require 'src/states/snail/SnailMovingState'
+
+

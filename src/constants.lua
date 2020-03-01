@@ -85,7 +85,8 @@ game_Textures = {
     ['backgrounds'] = love.graphics.newImage('assets/graphics/backgrounds.png'),
     ['green_alien'] = love.graphics.newImage('assets/graphics/green_alien.png'),
     ['jump_blocks'] = love.graphics.newImage('assets/graphics/jump_blocks.png'),
-    ['bushes'] = love.graphics.newImage('assets/graphics/bushes_and_cacti.png')
+    ['bushes'] = love.graphics.newImage('assets/graphics/bushes_and_cacti.png'),
+    ['creatures'] = love.graphics.newImage('assets/graphics/creatures.png')
 }
 
 
@@ -96,7 +97,8 @@ game_Frames = {
     ['backgrounds'] = generateQuad(game_Textures['backgrounds'], BACKGROUND_WIDTH, BACKGROUND_HEIGHT),
     ['green_alien'] = generateQuad(game_Textures['green_alien'], CHARACTER_WIDTH, CHARACTER_HEIGHT),
     ['jump_blocks'] = generateQuad(game_Textures['jump_blocks'], TILE_SIZE, TILE_SIZE),
-    ['bushes'] = generateQuad(game_Textures['bushes'], TILE_SIZE, TILE_SIZE)
+    ['bushes'] = generateQuad(game_Textures['bushes'], TILE_SIZE, TILE_SIZE),
+    ['creatures'] = generateQuad(game_Textures['creatures'], TILE_SIZE, TILE_SIZE)
 }
 
 -- TABLE OF TILE SET

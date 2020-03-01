@@ -28,6 +28,8 @@ function PlayState:init()
         tile_Map = self.tile_Map,
         level = self.level
     })
+
+    self:spawnEnemy();
     self.player:changeState('fall');
 end
 
@@ -79,4 +81,44 @@ function PlayState:updateCamera()
     end
 
     self.background_X = (self.cam_X / 3 )%256;
+end
+
+
+-- SPAWN ENEMY
+function PlayState:spawnEnemy()
+    for x = 1, self.tile_Map.width do 
+        ground_Found = false;
+
+        for y = 1, self.tile_Map.height do 
+            if not ground_Found then 
+                if self.tile_Map.tiles[y][x]:collidable() then 
+                    ground_Found = true;
+                
+            
+                    if math.random(20) == 1 then 
+                        local snail;
+                        snail = Snail{
+                            texture = 'creatures',
+                            x = (x - 1)*TILE_SIZE, y = (y - 2) * TILE_SIZE,
+                            width = TILE_SIZE, height = TILE_SIZE,
+                            stateMachine = StateMachine {
+                                ['idle'] = function() return SnailIdleState(self.tileMap, self.player, snail) end,
+                                ['moving'] = function() return SnailMovingState(self.tileMap, self.player, snail) end,
+                            },
+                            tile_Map = self.tile_Map,
+                            level = self.level
+                        }
+
+                        snail:changeState('idle', {
+                            wait = 2;
+                        })
+
+                        table.insert(self.level.entities, snail)
+                        break;
+                    end
+                end
+            end
+        end
+    end
+
 end

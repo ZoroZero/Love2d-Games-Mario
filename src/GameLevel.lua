@@ -26,4 +26,10 @@ function GameLevel:render(camera_Scroll_X)
             object:render();
         end
     end
+
+    for k, entity in pairs(self.entities) do
+        if entity.x >= camera_Scroll_X - 20 and entity.x - camera_Scroll_X <= VIRTUAL_WIDTH + 20 then
+            entity:render();
+        end
+    end
 end

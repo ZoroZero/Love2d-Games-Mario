@@ -95,5 +95,5 @@ function LevelMaker.generateMap(map_width, map_height)
     end
 
     tile_map.tiles = tiles
-    return GameLevel(entity, objects, tile_map);
+    return GameLevel(entities, objects, tile_map);
 end
