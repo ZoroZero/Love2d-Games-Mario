@@ -24,7 +24,6 @@ function PlayerFallingState:update(dt)
     if (bottom_Left_Tile and bottom_Right_Tile) and (bottom_Left_Tile:collidable() or bottom_Right_Tile:collidable()) then 
         self.player.dy = 0;
         self.player:changeState('idle');
-
         self.player.y = (bottom_Left_Tile.y - 1) * TILE_SIZE - self.player.height;
     end
 

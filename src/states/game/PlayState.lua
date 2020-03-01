@@ -8,9 +8,8 @@ function PlayState:init()
     self.cam_Y = 0;
 
     -- Set up level
-    self.level = TileMap(MAP_WIDTH, MAP_HEIGHT);
-    self.level.tiles = LevelMaker.generateMap(MAP_WIDTH, MAP_HEIGHT);
-    self.tile_Map = self.level;
+    self.level = LevelMaker.generateMap(MAP_WIDTH, MAP_HEIGHT);
+    self.tile_Map = self.level.tile_Map;
     -- Set up back ground
     self.background_image = math.random(3);
     self.background_X = 0;
@@ -26,7 +25,7 @@ function PlayState:init()
             ['jump'] = function() return PlayerJumpingState(self.player) end,
             ['fall'] = function() return PlayerFallingState(self.player) end
         },
-        tile_Map = self.level,
+        tile_Map = self.tile_Map,
         level = self.level
     })
     self.player:changeState('fall');

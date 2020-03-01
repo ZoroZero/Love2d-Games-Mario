@@ -23,6 +23,7 @@ require 'src/TileMap'
 require 'src/Entity'
 require 'src/Player'
 require 'src/GameObject'
+
 -- Game states
 require 'src/states/BaseState'
 require 'src/states/game/PlayState'

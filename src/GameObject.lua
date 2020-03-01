@@ -2,7 +2,7 @@ GameObject = Class{}
 
 
 -- Init
-function GameObject(params)
+function GameObject:init(params)
     self.x = params.x;
     self.y = params.y;
 
@@ -24,7 +24,7 @@ end
 
 -- Update
 function GameObject:update(dt)
-    -- body
+
 end
 
 -- Render

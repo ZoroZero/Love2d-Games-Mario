@@ -10,9 +10,17 @@ end
 -- UPDATE
 function GameLevel:update(dt)
     self.tile_Map:update(dt)
+
+    for k, object in pairs(self.objects) do
+        object:update(dt);
+    end
 end
 
 -- RENDER
-function GameLevel:render()
-    self.tile_Map:render()
+function GameLevel:render(camera_Scroll_X)
+
+    self.tile_Map:render(camera_Scroll_X)
+    for k, object in pairs(self.objects) do
+        object:render();
+    end
 end
