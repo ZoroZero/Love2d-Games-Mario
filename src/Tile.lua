@@ -25,11 +25,10 @@ end
 
 -- FUNCTION TO CHECK IF A TILE IS COLLIDABLE
 function Tile:collidable()
-    for k, v in COLLIDABLE_TILE do 
-        if v == self.tile_id then 
+    if GROUND_TILE == self.tile_id then 
             return true;
-        end
     end
+
     return false;
 end
 

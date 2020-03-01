@@ -29,11 +29,13 @@ function PlayerJumpingState:update(dt)
     self.player.y = self.player.y + self.player.dy;
 
     if love.keyboard.isDown('left') then
-        self.player.direction = 'left'
-        self.player.x = self.player.x - PLAYER_WALK_SPEED * dt
+        self.player.direction = 'left';
+        self.player.x = self.player.x - PLAYER_WALK_SPEED * dt;
+        self.player:checkLeftCollision();
     elseif love.keyboard.isDown('right') then
-        self.player.direction = 'right'
-        self.player.x = self.player.x + PLAYER_WALK_SPEED * dt
+        self.player.direction = 'right';
+        self.player.x = self.player.x + PLAYER_WALK_SPEED * dt;
+        self.player:checkRightCollision();
     end
 end
 

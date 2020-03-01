@@ -16,12 +16,13 @@ require 'src/Animation'
 
 -- Level generation file
 require 'src/LevelMaker'
+require 'src/GameLevel'
 -- Game component
 require 'src/Tile'
 require 'src/TileMap'
 require 'src/Entity'
 require 'src/Player'
-
+require 'src/GameObject'
 -- Game states
 require 'src/states/BaseState'
 require 'src/states/game/PlayState'

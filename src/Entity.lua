@@ -5,7 +5,8 @@ function Entity:init(params)
     -- Position
     self.x = params.x;
     self.y = params.y;
-
+    self.width = params.width;
+    self.height = params.height;
     -- Velocity
     self.dx = 0;
     self.dy = 0;
@@ -34,10 +35,11 @@ end
 -- RENDER FUNCTION
 function Entity:render()
     love.graphics.draw(game_Textures[self.texture], game_Frames[self.texture][self.currentAnimation:getCurrentFrame()],
-        math.floor(self.x), math.floor(self.y), 
-        
+        -- Position
+        math.floor(self.x) + self.width/2, math.floor(self.y) + self.height/2, 
+        -- Rotation
         0, self.direction == 'right' and 1 or -1, 1, 
-        
+        -- Drawing offset
         CHARACTER_WIDTH/2, CHARACTER_HEIGHT/2)
 end
 

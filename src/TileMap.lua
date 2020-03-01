@@ -24,7 +24,7 @@ function TileMap:pointToMap(x, y)
         return nil;
     end
 
-    return self.tiles[math.floor(x/TILE_SIZE) + 1][math.floor(y / TILE_SIE) + 1];
+    return self.tiles[math.floor(y/TILE_SIZE) + 1][math.floor(x / TILE_SIZE) + 1];
 end
 
 
