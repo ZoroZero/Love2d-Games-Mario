@@ -50,7 +50,7 @@ function Player:checkRightCollision(dt)
         self.y = self.y + 1;
 
         if #collided_Objects > 0 then 
-            self.x = self.x + PLAYER_WALK_SPEED * dt;
+            self.x = self.x - PLAYER_WALK_SPEED * dt;
         end
     end
 end

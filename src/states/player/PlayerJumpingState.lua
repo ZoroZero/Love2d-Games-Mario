@@ -40,7 +40,8 @@ function PlayerJumpingState:update(dt)
 
     -- CHECK FOR OBJECT COLLISION
     for k, object in pairs(self.player.level.objects) do 
-        if object:collides(self.player) then 
+        if object:collides(self.player) and 
+        (self.player.x + self.player.width/2 > object.x and self.player.x + self.player.width/2 < object.x + object.width)  then 
             if object.solid then 
                 self.player.y = object.y + object.height;
                 self.player.dy = 0;
