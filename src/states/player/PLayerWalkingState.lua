@@ -56,7 +56,7 @@ function PlayerWalkingState:update(dt)
                 Timer.tween(1, {
                     [object] = {flag_Y = object.y + POLL_HEIGHT - 16}
                 }):finish(function()
-                    game_State_Machine:change('play', {score = self.player.score})
+                    game_State_Machine:change('standby', {score = self.player.score, stage = self.player.stage + 1})
                 end);
             end
         end

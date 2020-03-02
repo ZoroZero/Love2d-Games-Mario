@@ -36,6 +36,7 @@ end
 -- ENTER FUNCTION
 function PlayState:enter(params)
     self.player.score = params.score;
+    self.player.stage = params.stage;
 end
 
 
