@@ -30,12 +30,12 @@ function LevelMaker.generateMap(map_width, map_height)
         block_height = 4;
 
         -- generate pit
-        if generate_Pit and x > 7 then
+        if generate_Pit and x > 10 and x < map_width - 10 then
             goto continue;
         end
  
         -- generate pillar
-        if generate_Pillar and x > 7 then 
+        if generate_Pillar and (x > 10 and x < map_width - 10) then 
             block_height = 2;
             for pillar = PLAYER_STANDING, PLAYER_STANDING - pillar_Height, -1 do 
                 tiles[pillar][x] =  Tile(x, pillar, GROUND_TILE, (pillar == PLAYER_STANDING - pillar_Height) and true or false, 
@@ -63,7 +63,7 @@ function LevelMaker.generateMap(map_width, map_height)
         end
 
         for ground = PLAYER_STANDING, map_height do
-            if x <= 7 then 
+            if x <= 10 or x >= map_width - 10 then 
                 tiles[ground][x] = Tile(x, ground, GROUND_TILE,  (ground == PLAYER_STANDING) and true or false, 
                 tile_Set, topper_Set);
             else
@@ -73,7 +73,7 @@ function LevelMaker.generateMap(map_width, map_height)
         end 
         ::continue::
 
-        if generate_Block then 
+        if generate_Block and not(x <= 10 or x >= map_width - 10) then 
             table.insert( objects, GameObject{
                         texture = 'jump_blocks',
                         x = (x - 1) * TILE_SIZE,
@@ -115,7 +115,6 @@ function LevelMaker.generateMap(map_width, map_height)
                                     };
 
                                     Timer.tween(0.1, {
-                                        
                                         [gem] = {y = obj.y -  TILE_SIZE}
                                     });
                                     game_Sounds['powerup-reveal']:play()

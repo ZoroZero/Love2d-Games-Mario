@@ -40,6 +40,11 @@ function PlayState:update(dt)
     
     self.player:update(dt)
 
+    if self.player.x <= 0 then
+        self.player.x = 0
+    elseif self.player.x > TILE_SIZE * self.tile_Map.width - self.player.width then
+        self.player.x = TILE_SIZE * self.tile_Map.width - self.player.width
+    end
 
     self.level:update(dt)
 
@@ -83,6 +88,8 @@ end
 function PlayState:updateCamera()
     if self.player.x < VIRTUAL_WIDTH / 2 - CHARACTER_WIDTH/2 then 
         self.cam_X = 0;
+    elseif self.player.x >= TILE_SIZE * (self.tile_Map.width - 7)  - self.player.width then
+        self.cam_X = self.cam_X;
     else
         self.cam_X = self.player.x - (VIRTUAL_WIDTH / 2 - CHARACTER_WIDTH/2);
     end
@@ -102,7 +109,7 @@ function PlayState:spawnEnemy()
                     ground_Found = true;
                 
             
-                    if math.random(20) == 1 and x > 10 and y == PLAYER_STANDING then 
+                    if math.random(20) == 1 and (x > 10 and x < self.tile_Map.width - 10) and y == PLAYER_STANDING then 
                         local snail;
                         snail = Snail{
                             texture = 'creatures',
