@@ -8,7 +8,7 @@ function LevelMaker.generateMap(map_width, map_height)
     local tiles = {};
     local tile_Set = math.random(#game_Frames['tile_sets']);
     local topper_Set = math.random(#game_Frames['topper_sets']);
-
+    local block_height = 4;
     -- generate table first
     for y = 1, map_height do 
 
@@ -75,7 +75,7 @@ function LevelMaker.generateMap(map_width, map_height)
 
         if generate_Block then 
             table.insert( objects, GameObject{
-                texture = 'jump_blocks',
+                        texture = 'jump_blocks',
                         x = (x - 1) * TILE_SIZE,
                         y = (block_height - 1) * TILE_SIZE,
                         width = TILE_SIZE,
@@ -88,7 +88,41 @@ function LevelMaker.generateMap(map_width, map_height)
                         solid = true,
 
                         -- collision function takes itself
-                        onCollide = function() end
+                        onCollide = function(obj) 
+                            if not obj.hit then 
+                                -- chance to spawn gem inside when hit
+                                local has_Gem = true;
+                                if has_Gem then 
+                                    local gem = GameObject{
+                                        texture = 'gems',
+                                        x = (x - 1) * TILE_SIZE,
+                                        y = obj.y - 0.5 * TILE_SIZE,
+                                        width = TILE_SIZE,
+                                        height = TILE_SIZE,
+
+                                        -- make it a random variant
+                                        frame = math.random(NUM_GEMS),
+                                        collidable = true,
+                                        hit = false,
+                                        solid = false,
+                                        consumable = true,
+
+                                        -- collision function takes itself
+                                        onConsume = function(player, obj)
+                                            player.score = player.score + 100;
+                                        end
+                                    };
+
+                                    Timer.tween(0.1, {
+                                        [gem] = {y = obj.y -  TILE_SIZE}
+                                    });
+
+                                    table.insert(objects, gem);
+                                end
+
+                                obj.hit = true;
+                            end
+                        end
             });
         end
 

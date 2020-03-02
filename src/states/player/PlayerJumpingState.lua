@@ -43,9 +43,13 @@ function PlayerJumpingState:update(dt)
         if object:collides(self.player) and 
         not (self.player.x < object.x - self.player.width + 2 or self.player.x > object.x + object.width - 2) then 
             if object.solid then 
+                object.onCollide(object);
                 self.player.y = object.y + object.height;
                 self.player.dy = 0;
                 self.player:changeState('fall');
+            elseif object.consumable then 
+                object.onConsume(self.player)
+                table.remove(self.player.level.objects, k)
             end
         end
     end

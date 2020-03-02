@@ -55,7 +55,7 @@ COLLIDABLE_TILES = {
 
 -- NUMBER OF BLOCK
 NUM_BLOCKS = 30;
-
+NUM_GEMS = 8;
 -- BUSH ID
 BUSH_IDS = {1, 2, 5, 6, 7}
 
@@ -83,15 +83,14 @@ game_Fonts = {
 
 -- TEXTURE
 game_Textures = {
-    -- ['background'] = love.graphics.newImage('assets/graphics/background.png'),
-    -- ['main'] = love.graphics.newImage('assets/graphics/match3.png')
     ['tile'] = love.graphics.newImage('assets/graphics/tiles.png'),
     ['topper'] = love.graphics.newImage('assets/graphics/tile_tops.png'),
     ['backgrounds'] = love.graphics.newImage('assets/graphics/backgrounds.png'),
     ['green_alien'] = love.graphics.newImage('assets/graphics/green_alien.png'),
     ['jump_blocks'] = love.graphics.newImage('assets/graphics/jump_blocks.png'),
     ['bushes'] = love.graphics.newImage('assets/graphics/bushes_and_cacti.png'),
-    ['creatures'] = love.graphics.newImage('assets/graphics/creatures.png')
+    ['creatures'] = love.graphics.newImage('assets/graphics/creatures.png'),
+    ['gems'] = love.graphics.newImage('assets/graphics/gems.png')
 }
 
 
@@ -103,7 +102,8 @@ game_Frames = {
     ['green_alien'] = generateQuad(game_Textures['green_alien'], CHARACTER_WIDTH, CHARACTER_HEIGHT),
     ['jump_blocks'] = generateQuad(game_Textures['jump_blocks'], TILE_SIZE, TILE_SIZE),
     ['bushes'] = generateQuad(game_Textures['bushes'], TILE_SIZE, TILE_SIZE),
-    ['creatures'] = generateQuad(game_Textures['creatures'], TILE_SIZE, TILE_SIZE)
+    ['creatures'] = generateQuad(game_Textures['creatures'], TILE_SIZE, TILE_SIZE),
+    ['gems'] = generateQuad(game_Textures['gems'], TILE_SIZE, TILE_SIZE)
 }
 
 -- TABLE OF TILE SET

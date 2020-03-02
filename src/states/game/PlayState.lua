@@ -71,6 +71,11 @@ function PlayState:render()
     -- render player
     self.player:render()
     love.graphics.pop();
+
+    -- Print player score 
+    love.graphics.setFont(game_Fonts['smallFont']);
+    love.graphics.setColor(255, 255, 0, 255);
+    love.graphics.printf("Score: " .. tostring(self.player.score), -10, 10, VIRTUAL_WIDTH, 'right');
 end
 
 

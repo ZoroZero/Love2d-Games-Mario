@@ -45,6 +45,14 @@ function PlayerWalkingState:update(dt)
         self.player:changeState('jump', JUMP_ACELERATION);
     end
 
+    -- Check if collide with any consumable
+    for k, object in pairs(self.player.level.objects) do 
+        if object:collides(self.player) and object.consumable then 
+            object.onConsume(self.player)
+            table.remove(self.player.level.objects, k)
+        end
+    end
+
     -- Check if collide with enemy
     for k, entity in pairs(self.player.level.entities) do 
         if entity:collide(self.player) then 

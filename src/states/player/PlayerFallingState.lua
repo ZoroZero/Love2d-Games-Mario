@@ -55,6 +55,9 @@ function PlayerFallingState:update(dt)
                 else
                     self.player:changeState('idle');
                 end
+            elseif object.consumable then 
+                object.onConsume(self.player)
+                table.remove(self.player.level.objects, k)
             end
         end
     end
@@ -64,6 +67,7 @@ function PlayerFallingState:update(dt)
         if entity:collide(self.player) then 
             self.player:changeState('jump', -2);
             table.remove(self.player.level.entities, k);
+            self.player.score = self.player.score + 100;
         end
     end
 end
