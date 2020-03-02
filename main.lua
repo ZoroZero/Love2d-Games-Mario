@@ -29,6 +29,9 @@ function love.load()
     }
     game_State_Machine:change('start');
     
+    -- Play background music
+    game_Sounds['music']:play();
+    game_Sounds['music']:setLooping(true);
     -- SET UP KEY CHECK
     love.keyboard.keysPressed = {};
 end

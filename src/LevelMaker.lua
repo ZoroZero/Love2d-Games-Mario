@@ -109,17 +109,19 @@ function LevelMaker.generateMap(map_width, map_height)
 
                                         -- collision function takes itself
                                         onConsume = function(player, obj)
+                                            game_Sounds['pickup']:play()
                                             player.score = player.score + 100;
                                         end
                                     };
 
                                     Timer.tween(0.1, {
+                                        
                                         [gem] = {y = obj.y -  TILE_SIZE}
                                     });
-
+                                    game_Sounds['powerup-reveal']:play()
                                     table.insert(objects, gem);
                                 end
-
+                                game_Sounds['empty-block']:play()
                                 obj.hit = true;
                             end
                         end

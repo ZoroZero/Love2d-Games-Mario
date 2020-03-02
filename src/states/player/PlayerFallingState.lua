@@ -29,7 +29,10 @@ function PlayerFallingState:update(dt)
             self.player:changeState('idle');
         end
         self.player.y = (bottom_Left_Tile.y - 1) * TILE_SIZE - self.player.height;
+
+    -- Check if fall off ground
     elseif self.player.y > VIRTUAL_HEIGHT then 
+        game_Sounds['death']:play();
         game_State_Machine:change('start');
 
     -- Change direction mid air
@@ -65,6 +68,8 @@ function PlayerFallingState:update(dt)
     -- Check if collide with enemy
     for k, entity in pairs(self.player.level.entities) do 
         if entity:collide(self.player) then 
+            game_Sounds['kill']:play();
+            game_Sounds['kill2']:play();
             self.player:changeState('jump', -2);
             table.remove(self.player.level.entities, k);
             self.player.score = self.player.score + 100;

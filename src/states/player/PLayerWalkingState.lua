@@ -42,6 +42,7 @@ function PlayerWalkingState:update(dt)
     end
     
     if love.keyboard.isDown('space') then 
+        game_Sounds['jump']:play();
         self.player:changeState('jump', JUMP_ACELERATION);
     end
 
@@ -56,6 +57,7 @@ function PlayerWalkingState:update(dt)
     -- Check if collide with enemy
     for k, entity in pairs(self.player.level.entities) do 
         if entity:collide(self.player) then 
+            game_Sounds['death']:play()
             game_State_Machine:change('start');
         end
     end

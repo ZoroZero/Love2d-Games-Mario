@@ -13,6 +13,7 @@ end
 
 -- ENTER
 function PlayerJumpingState:enter(jump_aceleration)
+    game_Sounds['jump']:play()
     self.player.dy = jump_aceleration;
 end
 
@@ -57,6 +58,7 @@ function PlayerJumpingState:update(dt)
     -- Check if collide with enemy
     for k, entity in pairs(self.player.level.entities) do 
         if entity:collide(self.player) then 
+            game_Sounds['death']:play();
             game_State_Machine:change('start');
         end
     end

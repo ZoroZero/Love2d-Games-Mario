@@ -61,16 +61,14 @@ BUSH_IDS = {1, 2, 5, 6, 7}
 
 -- SOUND
 game_Sounds = {
-    -- ['confirm'] = love.audio.newSource('assets/sounds/confirm.wav', 'static'),
-    -- ['clock'] = love.audio.newSource('assets/sounds/clock.wav', 'static'),
-    -- ['error'] = love.audio.newSource('assets/sounds/error.wav', 'static'),
-    -- ['game-over'] = love.audio.newSource('assets/sounds/game-over.wav', 'static'),
-    -- ['match'] = love.audio.newSource('assets/sounds/match.wav', 'static'),
-    -- ['music'] = love.audio.newSource('assets/sounds/music.mp3', 'static'),
-    -- ['music2'] = love.audio.newSource('assets/sounds/music2.mp3', 'static'),
-    -- ['music3'] = love.audio.newSource('assets/sounds/music3.mp3', 'static'),
-    -- ['next-level'] = love.audio.newSource('assets/sounds/next-level.wav', 'static'),
-    -- ['select'] = love.audio.newSource('assets/sounds/select.wav', 'static'),
+    ['death'] = love.audio.newSource('assets/sounds/death.wav', 'static'),
+    ['empty-block'] = love.audio.newSource('assets/sounds/empty-block.wav', 'static'),
+    ['jump'] = love.audio.newSource('assets/sounds/jump.wav', 'static'),
+    ['kill'] = love.audio.newSource('assets/sounds/kill.wav', 'static'),
+    ['kill2'] = love.audio.newSource('assets/sounds/kill2.wav', 'static'),
+    ['music'] = love.audio.newSource('assets/sounds/music.wav', 'static'),
+    ['pickup'] = love.audio.newSource('assets/sounds/pickup.wav', 'static'),
+    ['powerup-reveal'] = love.audio.newSource('assets/sounds/powerup-reveal.wav', 'static')
 }
 
 -- FONT
