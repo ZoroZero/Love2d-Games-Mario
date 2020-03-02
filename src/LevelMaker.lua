@@ -132,8 +132,8 @@ function LevelMaker.generateMap(map_width, map_height)
     -- generate flag poll;
     local flag = FlagPoll{
         texture = 'polls',
-        -- x = (map_width - 7) * TILE_SIZE - POLL_WIDTH,
-        x = 7* TILE_SIZE - POLL_WIDTH,
+        x = (map_width - 7) * TILE_SIZE - POLL_WIDTH,
+        -- x = 7* TILE_SIZE - POLL_WIDTH,
         y = (PLAYER_STANDING - 1) * TILE_SIZE - POLL_HEIGHT,
         width = POLL_WIDTH,
         height =  POLL_HEIGHT,

@@ -5,7 +5,7 @@ function StandByState:enter(params)
     self.score = params.score;
     self.stage = params.stage;
     self.opacity = 0;
-    Timer.tween(1, {
+    Timer.tween(0.9, {
         [self] = {opacity = 0.8};
     }):finish(function()
                 game_State_Machine:change('play', {score = self.score, stage = self.stage});

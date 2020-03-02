@@ -1,6 +1,6 @@
 require 'src/Dependencies'
 
-MAP_WIDTH = 100;
+MAP_WIDTH = 200;
 MAP_HEIGHT = 10;
 
 CAMERA_SCOLL_SPEEED = 60;
