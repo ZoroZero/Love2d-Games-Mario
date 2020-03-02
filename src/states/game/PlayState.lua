@@ -33,6 +33,12 @@ function PlayState:init()
     self.player:changeState('fall');
 end
 
+-- ENTER FUNCTION
+function PlayState:enter(params)
+    self.player.score = params.score;
+end
+
+
 -- UPDATE FUNCTION
 function PlayState:update(dt)
     Timer.update(dt)

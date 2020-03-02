@@ -45,7 +45,7 @@ function PlayerIdleState:update(dt)
     for k, entity in pairs(self.player.level.entities) do 
         if entity:collide(self.player) then 
             game_Sounds['death']:play();
-            game_State_Machine:change('start');
+            game_State_Machine:change('game_over', {score = self.player.score});
         end
     end
 end

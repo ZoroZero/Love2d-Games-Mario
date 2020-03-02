@@ -33,7 +33,7 @@ function PlayerFallingState:update(dt)
     -- Check if fall off ground
     elseif self.player.y > VIRTUAL_HEIGHT then 
         game_Sounds['death']:play();
-        game_State_Machine:change('start');
+        game_State_Machine:change('game_over', {score = self.player.score});
 
     -- Change direction mid air
     elseif love.keyboard.isDown('left') then
@@ -63,7 +63,7 @@ function PlayerFallingState:update(dt)
                 if not (getmetatable(object) == FlagPoll) then
                     table.remove(self.player.level.objects, k);
                 else 
-                    game_State_Machine:change('play');
+                    game_State_Machine:change('play',{score = self.player.score});
                 end
             end
         end

@@ -53,7 +53,7 @@ function PlayerWalkingState:update(dt)
             if not (getmetatable(object) == FlagPoll) then
                 table.remove(self.player.level.objects, k);
             else 
-                game_State_Machine:change('play');
+                game_State_Machine:change('play', {score = self.player.score});
             end
         end
     end
@@ -62,7 +62,7 @@ function PlayerWalkingState:update(dt)
     for k, entity in pairs(self.player.level.entities) do 
         if entity:collide(self.player) then 
             game_Sounds['death']:play()
-            game_State_Machine:change('start');
+            game_State_Machine:change('game_over', {score = self.player.score});
         end
     end
 end

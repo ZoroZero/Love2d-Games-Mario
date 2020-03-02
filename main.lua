@@ -1,6 +1,6 @@
 require 'src/Dependencies'
 
-MAP_WIDTH = 200;
+MAP_WIDTH = 100;
 MAP_HEIGHT = 10;
 
 CAMERA_SCOLL_SPEEED = 60;
@@ -25,7 +25,8 @@ function love.load()
     -- SET UP STATE MACHINE
     game_State_Machine = StateMachine {
         ['play'] = function () return PlayState() end,
-        ['start'] = function () return StartState() end
+        ['start'] = function () return StartState() end,
+        ['game_over'] = function () return GameOverState() end
     }
     game_State_Machine:change('start');
     
