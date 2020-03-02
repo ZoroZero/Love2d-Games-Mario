@@ -40,10 +40,17 @@ function Entity:render()
         -- Rotation
         0, self.direction == 'right' and 1 or -1, 1, 
         -- Drawing offset
-        CHARACTER_WIDTH/2, CHARACTER_HEIGHT/2)
+        self.width/2, self.height/2)
 end
 
 -- CHANGE STATE
 function Entity:changeState(state, params)
     self.stateMachine:change(state, params);
+end
+
+
+-- CHECK COLLISION FUNCTION
+function Entity:collide(target)
+    return not(self.x > target.x + target.width or self.x + self.width < target.x 
+                or self.y > target.y + target.height or self.y + self.height < target.y)
 end

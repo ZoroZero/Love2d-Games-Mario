@@ -20,54 +20,41 @@ function SnailMovingState:update(dt)
     self.movingTimer = self.movingTimer + dt
     self.snail.currentAnimation:update(dt)
 
-    -- reset movement direction and timer if timer is above duration
-    if self.movingTimer > self.movingDuration then
+    if self.movingTimer > self.movingDuration then 
+        self.movingDirection = self.movingDirection == 'left' and 'right' or 'left';
+        self.snail.direction = self.movingDirection;
+        self.movingTimer = 0;
+    end
 
-        -- chance to go into idle state randomly
-        if math.random(4) == 1 then
-            self.snail:changeState('idle', {
+    if self.movingDirection == 'left' then 
+        self.snail.x = self.snail.x - SNAIL_SPEED*dt;
+        -- Check for wall or pit collision 
+        local left_Tile = self.tilemap:pointToMap(self.snail.x, self.snail.y);
+        local left_Below_Tile = self.tilemap:pointToMap(self.snail.x, self.snail.y + self.snail.height);
 
-                -- random amount of time for snail to be idle
-                wait = math.random(5)
-            })
-        else
-            self.movingDirection = math.random(2) == 1 and 'left' or 'right'
-            self.snail.direction = self.movingDirection
-            self.movingDuration = math.random(5)
-            self.movingTimer = 0
+        if (left_Tile and left_Below_Tile) and (left_Tile:collidable() or not left_Below_Tile:collidable()) then 
+            self.snail.x = self.snail.x + SNAIL_SPEED * dt; 
+            self.movingDirection = 'right';
+            self.snail.direction = self.movingDirection;
+            self.movingTimer = 0;
         end
-    elseif self.snail.direction == 'left' then
-        self.snail.x = self.snail.x - SNAIL_MOVE_SPEED * dt
+    elseif self.movingDirection == 'right' then 
+        self.snail.x = self.snail.x + SNAIL_SPEED*dt;
+        -- Check for wall or pit collision
+        local right_Tile = self.tilemap:pointToMap(self.snail.x + self.snail.width, self.snail.y);
+        local right_Below_Tile = self.tilemap:pointToMap(self.snail.x + self.snail.width, self.snail.y + self.snail.height);
 
-        -- stop the snail if there's a missing tile on the floor to the left or a solid tile directly left
-        local tileLeft = self.tilemap:pointToTile(self.snail.x, self.snail.y)
-        local tileBottomLeft = self.tilemap:pointToTile(self.snail.x, self.snail.y + self.snail.height)
-
-        if (tileLeft and tileBottomLeft) and (tileLeft:collidable() or not tileBottomLeft:collidable()) then
-            self.snail.x = self.snail.x + SNAIL_MOVE_SPEED * dt
-
-            -- reset direction if we hit a wall
-            self.movingDirection = 'right'
-            self.snail.direction = self.movingDirection
-            self.movingDuration = math.random(5)
-            self.movingTimer = 0
-        end
-    else
-        self.snail.direction = 'right'
-        self.snail.x = self.snail.x + SNAIL_MOVE_SPEED * dt
-
-        -- stop the snail if there's a missing tile on the floor to the right or a solid tile directly right
-        local tileRight = self.tilemap:pointToTile(self.snail.x + self.snail.width, self.snail.y)
-        local tileBottomRight = self.tilemap:pointToTile(self.snail.x + self.snail.width, self.snail.y + self.snail.height)
-
-        if (tileRight and tileBottomRight) and (tileRight:collidable() or not tileBottomRight:collidable()) then
-            self.snail.x = self.snail.x - SNAIL_MOVE_SPEED * dt
-
-            -- reset direction if we hit a wall
-            self.movingDirection = 'left'
-            self.snail.direction = self.movingDirection
-            self.movingDuration = math.random(5)
-            self.movingTimer = 0
+        if (right_Tile and right_Below_Tile) and (right_Tile:collidable() or not right_Below_Tile:collidable()) then 
+            self.snail.x = self.snail.x - SNAIL_SPEED * dt; 
+            self.movingDirection = 'left';
+            self.snail.direction = self.movingDirection;
+            self.movingTimer = 0;
         end
     end
+
+
+    if math.abs(self.player.x - self.snail.x) <= 5 * TILE_SIZE then 
+        self.snail:changeState('chase');
+    end;
+
 end

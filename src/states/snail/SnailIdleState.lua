@@ -22,4 +22,9 @@ function SnailIdleState:update(dt)
     else
         self.snail:changeState('moving')
     end
+
+    -- Change to chasing state if too close
+    if math.abs(self.player.x - self.snail.x) <= 5 * TILE_SIZE then 
+        self.snail:changeState('chase');
+    end;
 end

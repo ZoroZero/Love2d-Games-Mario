@@ -7,5 +7,11 @@ end
 
 -- RENDER
 function Snail:render()
-    Entity.render(self)
+    love.graphics.draw(game_Textures[self.texture], game_Frames[self.texture][self.currentAnimation:getCurrentFrame()],
+    -- Position
+    math.floor(self.x) + self.width/2, math.floor(self.y) + self.height/2, 
+    -- Rotation
+    0, self.direction == 'right' and -1 or 1, 1, 
+    -- Drawing offset
+    CHARACTER_WIDTH/2, 16/2)
 end

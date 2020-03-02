@@ -29,10 +29,11 @@ function PlayerFallingState:update(dt)
             self.player:changeState('idle');
         end
         self.player.y = (bottom_Left_Tile.y - 1) * TILE_SIZE - self.player.height;
-    end
+    elseif self.player.y > VIRTUAL_HEIGHT then 
+        game_State_Machine:change('start');
 
     -- Change direction mid air
-    if love.keyboard.isDown('left') then
+    elseif love.keyboard.isDown('left') then
         self.player.direction = 'left';
         self.player.x = self.player.x - PLAYER_WALK_SPEED * dt;
         self.player:checkLeftCollision(dt);
@@ -55,6 +56,14 @@ function PlayerFallingState:update(dt)
                     self.player:changeState('idle');
                 end
             end
+        end
+    end
+
+    -- Check if collide with enemy
+    for k, entity in pairs(self.player.level.entities) do 
+        if entity:collide(self.player) then 
+            self.player:changeState('jump', -2);
+            table.remove(self.player.level.entities, k);
         end
     end
 end

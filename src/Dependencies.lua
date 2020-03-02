@@ -37,5 +37,6 @@ require 'src/states/player/PlayerJumpingState'
 
 require 'src/states/snail/SnailIdleState'
 require 'src/states/snail/SnailMovingState'
+require 'src/states/snail/SnailChasingState'
 
 

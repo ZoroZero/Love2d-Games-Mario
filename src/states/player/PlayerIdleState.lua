@@ -37,6 +37,13 @@ function PlayerIdleState:update(dt)
     end
 
     if love.keyboard.isDown('space') then 
-        self.player:changeState('jump');
+        self.player:changeState('jump', JUMP_ACELERATION);
+    end
+
+    -- Check if collide with enemy
+    for k, entity in pairs(self.player.level.entities) do 
+        if entity:collide(self.player) then 
+            game_State_Machine:change('start');
+        end
     end
 end

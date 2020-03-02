@@ -12,8 +12,8 @@ function PlayerJumpingState:init(player)
 end
 
 -- ENTER
-function PlayerJumpingState:enter()
-    self.player.dy = JUMP_ACELERATION;
+function PlayerJumpingState:enter(jump_aceleration)
+    self.player.dy = jump_aceleration;
 end
 
 -- UPDATE
@@ -47,6 +47,13 @@ function PlayerJumpingState:update(dt)
                 self.player.dy = 0;
                 self.player:changeState('fall');
             end
+        end
+    end
+
+    -- Check if collide with enemy
+    for k, entity in pairs(self.player.level.entities) do 
+        if entity:collide(self.player) then 
+            game_State_Machine:change('start');
         end
     end
 end

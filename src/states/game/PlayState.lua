@@ -39,7 +39,9 @@ function PlayState:update(dt)
 
     
     self.player:update(dt)
-    -- self.level:update(dt)
+
+
+    self.level:update(dt)
 
     self:updateCamera()
 end
@@ -80,7 +82,7 @@ function PlayState:updateCamera()
         self.cam_X = self.player.x - (VIRTUAL_WIDTH / 2 - CHARACTER_WIDTH/2);
     end
 
-    self.background_X = (self.cam_X / 3 )%256;
+    self.background_X = (self.cam_X / 3)%256;
 end
 
 
@@ -95,22 +97,23 @@ function PlayState:spawnEnemy()
                     ground_Found = true;
                 
             
-                    if math.random(20) == 1 then 
+                    if math.random(20) == 1 and x > 10 and y == PLAYER_STANDING then 
                         local snail;
                         snail = Snail{
                             texture = 'creatures',
-                            x = (x - 1)*TILE_SIZE, y = (y - 2) * TILE_SIZE,
+                            x = (x - 1) * TILE_SIZE, y = (y - 2) * TILE_SIZE,
                             width = TILE_SIZE, height = TILE_SIZE,
                             stateMachine = StateMachine {
-                                ['idle'] = function() return SnailIdleState(self.tileMap, self.player, snail) end,
-                                ['moving'] = function() return SnailMovingState(self.tileMap, self.player, snail) end,
+                                ['idle'] = function() return SnailIdleState(self.tile_Map, self.player, snail) end,
+                                ['moving'] = function() return SnailMovingState(self.tile_Map, self.player, snail) end,
+                                ['chase'] = function() return SnailChasingState(self.tile_Map, self.player, snail) end
                             },
                             tile_Map = self.tile_Map,
                             level = self.level
                         }
 
                         snail:changeState('idle', {
-                            wait = 2;
+                            wait = 1;
                         })
 
                         table.insert(self.level.entities, snail)

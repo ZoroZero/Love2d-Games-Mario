@@ -14,6 +14,10 @@ function GameLevel:update(dt)
     for k, object in pairs(self.objects) do
         object:update(dt);
     end
+
+    for k, entity in pairs(self.entities) do
+        entity:update(dt);
+    end
 end
 
 -- RENDER

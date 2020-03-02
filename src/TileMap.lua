@@ -13,7 +13,7 @@ end
 
 
 -- UPDATE FUNCTION
-function Tile:update(dt)
+function TileMap:update(dt)
 
 end
 
