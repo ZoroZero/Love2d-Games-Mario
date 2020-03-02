@@ -53,7 +53,11 @@ function PlayerJumpingState:update(dt)
                 if not (getmetatable(object) == FlagPoll) then
                     table.remove(self.player.level.objects, k);
                 else 
-                    game_State_Machine:change('play',{score = self.player.score});
+                    Timer.tween(1, {
+                        [object] = {flag_Y = object.y + POLL_HEIGHT - 16}
+                    }):finish(function()
+                        game_State_Machine:change('play', {score = self.player.score})
+                    end);
                 end
             end
         end
