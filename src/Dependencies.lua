@@ -24,6 +24,7 @@ require 'src/Entity'
 require 'src/Player'
 require 'src/GameObject'
 require 'src/Snail'
+require 'src/FlagPoll'
 
 -- Game states
 require 'src/states/BaseState'

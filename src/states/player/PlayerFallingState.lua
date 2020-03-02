@@ -59,8 +59,12 @@ function PlayerFallingState:update(dt)
                     self.player:changeState('idle');
                 end
             elseif object.consumable then 
-                object.onConsume(self.player)
-                table.remove(self.player.level.objects, k)
+                object.onConsume(self.player, object)
+                if not (getmetatable(object) == FlagPoll) then
+                    table.remove(self.player.level.objects, k);
+                else 
+                    game_State_Machine:change('play');
+                end
             end
         end
     end

@@ -19,6 +19,11 @@ PLAYER_WALK_SPEED = 60;
 SNAIL_HEIGHT = 16;
 SNAIL_WIDTH = 16;
 SNAIL_SPEED =10;
+
+-- POLL DIMENSION
+POLL_WIDTH = 16;
+POLL_HEIGHT = 48;
+
 -- TILE DIMENSIONS
 TILE_SIZE = 16;
 
@@ -33,6 +38,12 @@ NUM_TILES_PER_COL = 4;
 -- NUM OF TOPPER SETS
 NUM_TOPPER_SETS_PER_ROW = 6;
 NUM_TOPPER_SETS_PER_COL = 18;
+
+-- NUMOF FLAG SETS
+NUM_FLAG_SETS_PER_ROW = 3;
+NUM_FLAG_SETS_PER_COL = 4;
+NUM_FLAG_TILES_PER_ROW  = 3;
+NUM_FLAG_TILES_PER_COL = 1;
 
 -- GRAVITY CONSTANT
 GRAVITY = 10;
@@ -88,7 +99,8 @@ game_Textures = {
     ['jump_blocks'] = love.graphics.newImage('assets/graphics/jump_blocks.png'),
     ['bushes'] = love.graphics.newImage('assets/graphics/bushes_and_cacti.png'),
     ['creatures'] = love.graphics.newImage('assets/graphics/creatures.png'),
-    ['gems'] = love.graphics.newImage('assets/graphics/gems.png')
+    ['gems'] = love.graphics.newImage('assets/graphics/gems.png'),
+    ['polls'] = love.graphics.newImage('assets/graphics/flags.png'),
 }
 
 
@@ -101,7 +113,9 @@ game_Frames = {
     ['jump_blocks'] = generateQuad(game_Textures['jump_blocks'], TILE_SIZE, TILE_SIZE),
     ['bushes'] = generateQuad(game_Textures['bushes'], TILE_SIZE, TILE_SIZE),
     ['creatures'] = generateQuad(game_Textures['creatures'], TILE_SIZE, TILE_SIZE),
-    ['gems'] = generateQuad(game_Textures['gems'], TILE_SIZE, TILE_SIZE)
+    ['gems'] = generateQuad(game_Textures['gems'], TILE_SIZE, TILE_SIZE),
+    ['polls'] = table.slice(generateQuad(game_Textures['polls'], POLL_WIDTH, POLL_HEIGHT), 1, 6, 1),
+    ['flags'] = generateQuad(game_Textures['polls'], TILE_SIZE, TILE_SIZE),
 }
 
 -- TABLE OF TILE SET
@@ -111,3 +125,7 @@ game_Frames['tile_sets'] = generateTileSets(game_Frames['tiles'], NUM_TILE_SETS_
 -- TABLE OF TOPPER
 game_Frames['topper_sets'] = generateTileSets(game_Frames['toppers'], NUM_TOPPER_SETS_PER_ROW, NUM_TOPPER_SETS_PER_COL,
                                             NUM_TILES_PER_ROW, NUM_TILES_PER_COL);
+
+-- TABLE OF FLAGS
+game_Frames['flag_sets'] = generateTileSets(game_Frames['flags'], NUM_FLAG_SETS_PER_ROW, NUM_FLAG_SETS_PER_COL,
+                                            NUM_FLAG_TILES_PER_ROW, NUM_FLAG_TILES_PER_COL);

@@ -129,6 +129,35 @@ function LevelMaker.generateMap(map_width, map_height)
 
     end
 
+    -- generate flag poll;
+    local flag = FlagPoll{
+        texture = 'polls',
+        x = (map_width - 7) * TILE_SIZE - POLL_WIDTH,
+        y = (PLAYER_STANDING - 1) * TILE_SIZE - POLL_HEIGHT,
+        width = POLL_WIDTH,
+        height =  POLL_HEIGHT,
+
+        -- make it a random variant
+        frame = 1,
+        collidable = true,
+        hit = false,
+        solid = true,
+        consumable = true,
+
+        onConsume = function(player, obj)
+            local animation = Animation{
+                frames = {3},
+                interval = 1
+            }
+            obj.currentAnimation = animation;
+            Timer.tween(0.5, {
+                [obj] = {flag_Y = obj.y + POLL_HEIGHT - 16}
+            });
+        end
+    }
+    table.insert(objects, flag);
+
+
     tile_map.tiles = tiles
     return GameLevel(entities, objects, tile_map);
 end

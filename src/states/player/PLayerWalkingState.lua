@@ -49,8 +49,12 @@ function PlayerWalkingState:update(dt)
     -- Check if collide with any consumable
     for k, object in pairs(self.player.level.objects) do 
         if object:collides(self.player) and object.consumable then 
-            object.onConsume(self.player)
-            table.remove(self.player.level.objects, k)
+            object.onConsume(self.player, object)
+            if not (getmetatable(object) == FlagPoll) then
+                table.remove(self.player.level.objects, k);
+            else 
+                game_State_Machine:change('play');
+            end
         end
     end
 
