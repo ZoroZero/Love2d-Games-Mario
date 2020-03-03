@@ -4,6 +4,7 @@ Player = Class {__includes = Entity}
 function Player:init(params)
     Entity.init(self, params)
     self.score = 0;
+    self.has_Key = false;
 end
 
 -- UPDATE

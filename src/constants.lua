@@ -56,7 +56,7 @@ BACKGROUND_HEIGHT = 128;
 -- MAP TILE ID
 EMPTY_TILE = 5
 GROUND_TILE = 3
-PLAYER_STANDING = 7;
+PLAYER_STANDING = 8;
 
 
 -- COLLIDABLE TILES
@@ -101,6 +101,7 @@ game_Textures = {
     ['creatures'] = love.graphics.newImage('assets/graphics/creatures.png'),
     ['gems'] = love.graphics.newImage('assets/graphics/gems.png'),
     ['polls'] = love.graphics.newImage('assets/graphics/flags.png'),
+    ['keys'] = love.graphics.newImage('assets/graphics/keys_and_locks.png'),
 }
 
 
@@ -116,6 +117,7 @@ game_Frames = {
     ['gems'] = generateQuad(game_Textures['gems'], TILE_SIZE, TILE_SIZE),
     ['polls'] = table.slice(generateQuad(game_Textures['polls'], POLL_WIDTH, POLL_HEIGHT), 1, 6, 1),
     ['flags'] = generateQuad(game_Textures['polls'], TILE_SIZE, TILE_SIZE),
+    ['keys'] = generateQuad(game_Textures['keys'], TILE_SIZE, TILE_SIZE),
 }
 
 -- TABLE OF TILE SET

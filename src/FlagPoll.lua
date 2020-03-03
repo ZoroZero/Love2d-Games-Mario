@@ -12,7 +12,7 @@ function FlagPoll:init(params)
     
     self.currentAnimation = Animation{
         frames = {1,2},
-        interval = 0.1,
+        interval = 0.2,
     }
 end
 

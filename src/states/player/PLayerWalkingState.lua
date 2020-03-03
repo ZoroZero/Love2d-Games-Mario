@@ -48,16 +48,20 @@ function PlayerWalkingState:update(dt)
 
     -- Check if collide with any consumable
     for k, object in pairs(self.player.level.objects) do 
-        if object:collides(self.player) and object.consumable then 
-            object.onConsume(self.player, object)
-            if not (getmetatable(object) == FlagPoll) then
-                table.remove(self.player.level.objects, k);
-            else 
-                Timer.tween(1, {
-                    [object] = {flag_Y = object.y + POLL_HEIGHT - 16}
-                }):finish(function()
-                    game_State_Machine:change('standby', {score = self.player.score, stage = self.player.stage + 1})
-                end);
+        if object:collides(self.player) then 
+            if object.consumable then 
+                object.onConsume(self.player, object)
+                if not (getmetatable(object) == FlagPoll) then
+                    table.remove(self.player.level.objects, k);
+                else 
+                    Timer.tween(1, {
+                        [object] = {flag_Y = object.y + POLL_HEIGHT - 16}
+                    }):finish(function()
+                        game_State_Machine:change('standby', {score = self.player.score, stage = self.player.stage + 1})
+                    end);
+                end
+            elseif object.solid and object.texture == 'keys' then 
+                object.onCollide(self.player, object);
             end
         end
     end
